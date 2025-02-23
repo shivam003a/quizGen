@@ -27,7 +27,7 @@ const quizSchema = new mongoose.Schema({
     createdBy: {
         type: String
     }
-})
+}, { timestamps: true })
 
 const Quiz = mongoose.model("Quiz", quizSchema)
 export default Quiz;

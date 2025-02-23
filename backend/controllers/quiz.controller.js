@@ -1,5 +1,8 @@
+import mongoose from 'mongoose'
+import { isMongoIdValid } from '../helpers/validMongoId.js'
 import genai from '../helpers/genAi.js'
 import Quiz from '../models/quiz.schema.js'
+import Score from '../models/score.schema.js'
 
 export const createQuiz = async (req, res) => {
     const { topic, difficulty, noOfQuestion } = req.body
@@ -122,6 +125,146 @@ export const getQuiz = async (req, res) => {
         res.status(500).json({
             success: false,
             message: e?.message || "Internal Server Error",
+            response: null
+        })
+    }
+}
+
+export const getSingQuiz = async (req, res) => {
+    const { quizId } = req.params
+    if (!quizId) {
+        return res.status(400).json({
+            success: false,
+            message: 'quizId is required',
+            response: null
+        })
+    }
+
+    try {
+        const quizData = await Quiz.findById(quizId);
+
+        res.status(200).json({
+            success: true,
+            message: 'Fetched successfully',
+            response: quizData
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            message: e?.message || 'Internal server error',
+            response: null
+        })
+    }
+}
+
+export const submitQuizForFirstTime = async (req, res) => {
+    const { userScore, quizId, userId, userSelectedAns } = req.body
+    const { id } = req.user
+
+    if (!isMongoIdValid(userId)) {
+        return res.status(400).json({
+            success: true,
+            message: "userId must be valid id",
+            response: null
+        })
+    }
+
+    if (!isMongoIdValid(quizId)) {
+        return res.status(400).json({
+            success: true,
+            message: "quizId must be valid id",
+            response: null
+        })
+    }
+
+    if (!Array.isArray(userSelectedAns)) {
+        return res.status(400).json({
+            success: true,
+            message: "userSelectedAns must be a array",
+            response: null
+        })
+    }
+
+    if (userId !== id) {
+        return res.status(401).json({
+            success: false,
+            message: "Cannot attempt others quiz"
+        })
+    }
+
+    try {
+        const scoreData = await Score.create({
+            quizId,
+            userId,
+            userScore,
+            userSelectedAns,
+            totalAttempt: 1
+        })
+
+        res.status(200).json({
+            success: true,
+            message: 'Submitted successfully',
+            response: scoreData
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            message: e?.message || "Internal server error",
+            response: null
+        })
+    }
+}
+
+export const submitQuizForMoreTime = async (req, res) => {
+    const { userScore, quizId, userId, userSelectedAns } = req.body
+    const { id } = req.user
+
+    if (!isMongoIdValid(userId)) {
+        return res.status(400).json({
+            success: true,
+            message: "userId must be valid id",
+            response: null
+        })
+    }
+
+    if (!isMongoIdValid(quizId)) {
+        return res.status(400).json({
+            success: true,
+            message: "quizId must be valid id",
+            response: null
+        })
+    }
+
+    if (!Array.isArray(userSelectedAns)) {
+        return res.status(400).json({
+            success: true,
+            message: "userSelectedAns must be a array",
+            response: null
+        })
+    }
+
+    if (userId !== id) {
+        return res.status(401).json({
+            success: false,
+            message: "Cannot attempt others quiz"
+        })
+    }
+
+    try {
+        const updatedScoreData = await Score.findOneAndUpdate({ quizId, userId }, {
+            $set: { userScore, userSelectedAns },
+            $inc: { totalAttempt: 1 }
+        }, { new: true })
+
+        res.status(200).json({
+            success: true,
+            message: 'Submitted successfully',
+            response: updatedScoreData
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            message: e?.message || "Internal server error",
             response: null
         })
     }

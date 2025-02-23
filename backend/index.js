@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import connectDB from './config/db.js'
 import authRoutes from './routers/auth.route.js'
 import quizRoutes from './routers/quiz.route.js'
+import dashboardRoutes from './routers/dashboard.route.js'
 import * as limiter from './helpers/rateLimiter.js'
 
 // Initializing Express
@@ -38,6 +39,7 @@ app.use(limiter?.globalLimiter)
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/quiz', quizRoutes)
+app.use('/api/dashboard', dashboardRoutes)
 
 // Default Route
 app.get('/', (req, res) => {

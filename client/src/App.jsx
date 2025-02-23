@@ -1,10 +1,14 @@
 import './App.css'
+import { Route, Routes } from 'react-router'
+import Landing from './pages/Landing'
 
 function App() {
 
   return (
     <>
-      <div>Hello</div>
+      <Routes>
+        <Route index element={<Landing />} />
+      </Routes>
     </>
   )
 }

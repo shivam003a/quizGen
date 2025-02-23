@@ -13,7 +13,7 @@ const blacklistSchema = new mongoose.Schema({
             expires: 0
         }
     }
-})
+}, { timestamps: true })
 
 const blackListData = mongoose.model("blackListData", blacklistSchema)
 export default blackListData;
