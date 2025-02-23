@@ -6,7 +6,7 @@ export const isAuthenticated = async (req, res, next) => {
 
     if (!token) {
         return res.status(401).json({
-            success: true,
+            success: false,
             message: "Unauthorized",
             response: null
         })
@@ -15,8 +15,8 @@ export const isAuthenticated = async (req, res, next) => {
     const isBlackListed = await blackListData.findOne({ token });
     if (isBlackListed) {
         return res.status(403).json({
-            success: true,
-            message: 'Unauthorized. x Please login again',
+            success: false,
+            message: 'Unauthorized. Please login again',
             response: null
         })
     }
@@ -26,7 +26,7 @@ export const isAuthenticated = async (req, res, next) => {
 
         if (!decoded) {
             return res.status(403).json({
-                success: true,
+                success: false,
                 message: 'Invalid token, access denied',
                 response: null
             })
@@ -35,7 +35,7 @@ export const isAuthenticated = async (req, res, next) => {
         next();
     } catch (e) {
         return res.status(403).json({
-            success: true,
+            success: false,
             message: 'Invalid token, access denied',
             response: null
         })

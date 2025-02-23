@@ -7,7 +7,6 @@ export const signup = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
 
     try {
-        console.log(req.body)
         if (!firstName || !email || !password) {
             return res.status(401).json({
                 success: false,
@@ -46,7 +45,7 @@ export const signup = async (req, res) => {
 
     } catch (e) {
         res.status(500).json({
-            success: true,
+            success: false,
             message: e?.message || "Internal Server Error",
             response: null
         })
@@ -102,7 +101,7 @@ export const signin = async (req, res) => {
         })
     } catch (e) {
         res.status(500).json({
-            success: true,
+            success: false,
             message: e?.message || "Internal Server Error",
             response: null
         })
@@ -122,7 +121,7 @@ export const signout = async (req, res) => {
         const decoded = jwt.decode(token);
         if (!decoded || !decoded?.exp) {
             return res.status(400).json({
-                success: true,
+                success: false,
                 message: "Invalid token",
                 response: null
             })
@@ -145,7 +144,7 @@ export const signout = async (req, res) => {
 
     } catch (e) {
         res.status(500).json({
-            success: true,
+            success: false,
             message: e?.message || "Internal Server Error",
             response: null
         })

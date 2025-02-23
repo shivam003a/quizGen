@@ -16,7 +16,7 @@ export const getScoreData = async (req, res) => {
         const scoresData = await Score.find({ userId }).populate('quizId')
 
         res.status(200).json({
-            success: false,
+            success: true,
             message: 'Fetch successfully',
             response: scoresData
         })
@@ -51,7 +51,7 @@ export const getOneScoreData = async (req, res) => {
         const scoresData = await Score.find({ userId, quizId }).populate('quizId')
 
         res.status(200).json({
-            success: false,
+            success: true,
             message: 'Fetch successfully',
             response: scoresData
         })

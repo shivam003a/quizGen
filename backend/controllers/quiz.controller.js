@@ -11,7 +11,7 @@ export const createQuiz = async (req, res) => {
     try {
         if (!topic || !difficulty || !noOfQuestion) {
             return res.status(401).json({
-                success: true,
+                success: false,
                 message: 'All fields are required',
                 response: null
             })
@@ -82,7 +82,7 @@ export const createQuiz = async (req, res) => {
 
     } catch (e) {
         res.status(500).json({
-            success: true,
+            success: false,
             message: e || "Internal Server Error",
             response: null
         })
@@ -163,7 +163,7 @@ export const submitQuizForFirstTime = async (req, res) => {
 
     if (!isMongoIdValid(userId)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "userId must be valid id",
             response: null
         })
@@ -171,7 +171,7 @@ export const submitQuizForFirstTime = async (req, res) => {
 
     if (!isMongoIdValid(quizId)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "quizId must be valid id",
             response: null
         })
@@ -179,7 +179,7 @@ export const submitQuizForFirstTime = async (req, res) => {
 
     if (!Array.isArray(userSelectedAns)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "userSelectedAns must be a array",
             response: null
         })
@@ -188,7 +188,8 @@ export const submitQuizForFirstTime = async (req, res) => {
     if (userId !== id) {
         return res.status(401).json({
             success: false,
-            message: "Cannot attempt others quiz"
+            message: "Cannot attempt others quiz",
+            response: null
         })
     }
 
@@ -221,7 +222,7 @@ export const submitQuizForMoreTime = async (req, res) => {
 
     if (!isMongoIdValid(userId)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "userId must be valid id",
             response: null
         })
@@ -229,7 +230,7 @@ export const submitQuizForMoreTime = async (req, res) => {
 
     if (!isMongoIdValid(quizId)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "quizId must be valid id",
             response: null
         })
@@ -237,7 +238,7 @@ export const submitQuizForMoreTime = async (req, res) => {
 
     if (!Array.isArray(userSelectedAns)) {
         return res.status(400).json({
-            success: true,
+            success: false,
             message: "userSelectedAns must be a array",
             response: null
         })
@@ -246,7 +247,8 @@ export const submitQuizForMoreTime = async (req, res) => {
     if (userId !== id) {
         return res.status(401).json({
             success: false,
-            message: "Cannot attempt others quiz"
+            message: "Cannot attempt others quiz",
+            response: null
         })
     }
 
