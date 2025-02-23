@@ -1,0 +1,42 @@
+.typewriter {
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 6px solid black;
+    width: 0;
+    animation: typing 5s steps(30, end) infinite, blink 0.3s infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 58%;
+    }
+
+    70% {
+        width: 58%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.text-image {
+    background-image: url('./assets/grayscale.jpeg');
+    /* Your image */
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    opacity: 1;
+    /* Reduce opacity */
+}

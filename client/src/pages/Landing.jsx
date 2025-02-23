@@ -1,13 +1,18 @@
 import React from 'react'
+import '../App.css'
+import Hero from '../components/Hero'
+import Features from '../components/Features'
 
 function Landing() {
     return (
-        <div>
-            <div className='w-full h-16 flex justify-between items-center bg-[#83c5be]'>
-                <div className='text-2xl'>quizGen</div>
-                <div className='h-full text-2xl bg-[#006d77] text-center'>Get Started</div>
+        <>
+            <div className='max-w-[1200px] mx-auto'>
+                <Hero />
             </div>
-        </div>
+            <div className='max-w-[1200px] min-h-screen mx-auto'>
+                <Features />
+            </div>
+        </>
     )
 }
 
