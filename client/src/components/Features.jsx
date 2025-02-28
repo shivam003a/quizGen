@@ -62,7 +62,7 @@ const Features = () => {
                 <div className='flex-3/10 flex flex-col'>
                     {
                         features?.length > 0 && features?.map((feature, index) => (
-                            <span className={`p-5 pl-10 rounded-l-4xl text-lg cursor-pointer ${index === activeTile ? 'bg-blue-100 text-cs-blue' : 'bg-white'}`}
+                            <span key={index} className={`p-5 pl-10 rounded-l-4xl text-lg cursor-pointer ${index === activeTile ? 'bg-blue-100 text-cs-blue' : 'bg-white'}`}
                                 onClick={(e) => setActiveTile(index)}
                             >{feature?.title}</span>
                         ))
@@ -72,7 +72,7 @@ const Features = () => {
                     <div className='flex-1/2 flex flex-col gap-6 p-4'>
                         <span className='text-4xl text-white font-bold capitalize text-image'>{
                             features[activeTile]?.subtitle?.split(' ')?.map((ele, i) => (
-                                <div>{ele}</div>
+                                <div key={i}>{ele}</div>
                             ))
                         }</span>
                         <span className='text-xl text-cs-blue'>{features[activeTile]?.description}</span>

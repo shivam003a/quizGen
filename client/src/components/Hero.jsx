@@ -3,15 +3,19 @@ import { NavLink } from 'react-router'
 import landingSvg from '../assets/landing.svg'
 import bgVideo from '../assets/bg.mp4'
 import { FaArrowRight } from "react-icons/fa";
+import AuthDialog from './AuthDialog';
 
 const Hero = () => {
-    const [open, setOpen] = useState(false)
+    const [isGetStartedOpen, setIsGetStartedOpen] = useState(false)
+    const [isDemoOpen, setIsDemoOpen] = useState(false)
     return (
         <div className='flex items-center gap-4 min-h-screen'>
             <div className='flex-1/2 h-full bg-tran flex flex-col justify-center items-between gap-3 z-10 px-4'>
-                <span className='w-fit text-8xl font-honk mb-2 typewriter'>
-                    quizGen
-                </span>
+                <div className='w-fit flex'>
+                    <span className='w-full text-8xl font-honk mb-2 typewriter'>
+                        quizGen
+                    </span>
+                </div>
                 <p className='text-3xl font-bold font-montserrat text-black'>
                     Generate & Attempt AI-Powered Quizzes Instantly!
                 </p>
@@ -20,12 +24,14 @@ const Hero = () => {
                 </p>
                 <div className='flex flex-row gap-3 mt-4'>
                     <span to='#' className='flex items-center gap-2 px-4 py-2 bg-cs-blue text-white font-bold rounded-4xl cursor-pointer'
-                        onClick={() => setOpen(true)}
+                        onClick={() => setIsGetStartedOpen(true)}
                     >
                         Get Started
                         <FaArrowRight />
                     </span>
-                    <span to='#' className='px-4 py-2 bg-blue-200 rounded-4xl cursor-pointer'>
+                    <span to='#' className='px-4 py-2 bg-blue-200 rounded-4xl cursor-pointer'
+                        onClick={() => setIsDemoOpen(true)}
+                    >
                         Get Demo
                     </span>
                 </div>
@@ -37,6 +43,28 @@ const Hero = () => {
             <video loop autoPlay muted className='w-full h-full absolute top-0 left-0 object-cover z-0 opacity-5'>
                 <source src={bgVideo} />
             </video>
+
+            {
+                isGetStartedOpen ? (
+                    <AuthDialog
+                        isOpen={isGetStartedOpen}
+                        onClose={() => setIsGetStartedOpen(false)}
+                        header='Get Started'
+                        type="auth"
+                    />
+                ) : null
+            }
+            {
+                isDemoOpen ? (
+                    <AuthDialog
+                        isOpen={isDemoOpen}
+                        onClose={() => setIsDemoOpen(false)}
+                        header='Product Demo'
+                        type="demo"
+                    />
+                ) : null
+            }
+
         </div>
     )
 }
