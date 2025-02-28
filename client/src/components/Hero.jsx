@@ -9,7 +9,7 @@ const Hero = () => {
     const [isGetStartedOpen, setIsGetStartedOpen] = useState(false)
     const [isDemoOpen, setIsDemoOpen] = useState(false)
     return (
-        <div className='flex items-center gap-4 min-h-screen'>
+        <div className='flex flex-col-reverse items-center gap-4 py-16 md:py-32 md:flex-row'>
             <div className='flex-1/2 h-full bg-tran flex flex-col justify-center items-between gap-3 z-10 px-4'>
                 <div className='w-fit flex'>
                     <span className='w-full text-8xl font-honk mb-2 typewriter'>
@@ -36,13 +36,9 @@ const Hero = () => {
                     </span>
                 </div>
             </div>
-            <div className='flex-1/2'>
-                <img src={landingSvg} className='w-9/12 h-9/12' />
+            <div className='flex-1/2 mt-8 md:mt-0'>
+                <img src={landingSvg} className='w-9/12 h-9/12 mx-auto p-4' />
             </div>
-
-            <video loop autoPlay muted className='w-full h-full absolute top-0 left-0 object-cover z-0 opacity-5'>
-                <source src={bgVideo} />
-            </video>
 
             {
                 isGetStartedOpen ? (
