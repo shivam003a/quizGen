@@ -112,7 +112,8 @@ export const getQuiz = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            data: allQuizData,
+            response: allQuizData,
+            message: "Fetched successfully",
             pagination: {
                 totalEntries: totalEntry,
                 totalPages,

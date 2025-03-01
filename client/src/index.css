@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 * {
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 
 @theme {
@@ -13,4 +13,5 @@
     --color-cs-blue: #6C63FF;
     --color-cs-gray: #777777;
     --color-cs-dark-blue: #180065;
+    --color-cs-green: #00DFC0;
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router'
 import landingSvg from '../assets/landing.svg'
-import bgVideo from '../assets/bg.mp4'
 import { FaArrowRight } from "react-icons/fa";
 import AuthDialog from './AuthDialog';
 
@@ -23,12 +22,12 @@ const Hero = () => {
                     Create quizzes on any topic with AI or challenge yourself with existing quizzes. Learning made fun and effortless!
                 </p>
                 <div className='flex flex-row gap-3 mt-4'>
-                    <span to='#' className='flex items-center gap-2 px-4 py-2 bg-cs-blue text-white font-bold rounded-4xl cursor-pointer'
+                    <NavLink to='/signin' className='flex items-center gap-2 px-4 py-2 bg-cs-blue text-white font-bold rounded-4xl cursor-pointer'
                         onClick={() => setIsGetStartedOpen(true)}
                     >
                         Get Started
                         <FaArrowRight />
-                    </span>
+                    </NavLink>
                     <span to='#' className='px-4 py-2 bg-blue-200 rounded-4xl cursor-pointer'
                         onClick={() => setIsDemoOpen(true)}
                     >
@@ -40,7 +39,7 @@ const Hero = () => {
                 <img src={landingSvg} className='w-9/12 h-9/12 mx-auto p-4' />
             </div>
 
-            {
+            {/* {
                 isGetStartedOpen ? (
                     <AuthDialog
                         isOpen={isGetStartedOpen}
@@ -49,7 +48,7 @@ const Hero = () => {
                         type="auth"
                     />
                 ) : null
-            }
+            } */}
             {
                 isDemoOpen ? (
                     <AuthDialog
