@@ -3,7 +3,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const QuizCard = ({ quiz }) => {
     const [hovered, setHovered] = useState(false)
-    const { topic, createdBy, noOfQuestion, difficulty } = quiz;
+    const { topic, createdBy, createdAt, noOfQuestion, difficulty } = quiz;
 
     // Capitalize the first letter of the difficulty
     const capitalizedDifficulty = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -11,9 +11,10 @@ const QuizCard = ({ quiz }) => {
     return (
         <div className='w-full bg-[#F7F6FF] p-4 flex flex-col justify-center items-start gap-4 shadow'>
             <span className='font-poppins text-2xl font-semibold text-cs-blue capitalize'>{topic}</span>
-            <div className='flex items-center justify-center gap-1 -mt-3'>
+            <div className='flex flex-col items-start justify-center gap-1 -mt-3'>
                 {/* <span className='font-poppins text-cs-blue'>createdBy:</span> */}
                 <span className='font-poppins font-light text-cs-gray text-sm'>{createdBy}</span>
+                <span className='font-poppins font-light text-cs-gray text-sm'>{createdAt}</span>
             </div>
             <div className='w-full flex items-center justify-between'>
                 <span className='font-poppins font-light py-[1px] px-4 bg-cs-blue text-white'>{noOfQuestion}</span>
@@ -25,7 +26,9 @@ const QuizCard = ({ quiz }) => {
                     color={`${hovered ? '#6C63FF' : '#c7c4c4'}`}
                     size={24}
                     onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)} />
+                    onMouseLeave={() => setHovered(false)}
+                    className='cursor-pointer'
+                />
             </div>
         </div>
     )
