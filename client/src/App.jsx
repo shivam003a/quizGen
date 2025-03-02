@@ -2,8 +2,6 @@ import './App.css'
 import { Route, Routes } from 'react-router'
 import { Suspense, lazy } from 'react'
 import Loading from './components/Loading'
-import Dashboard from './components/Dashboard'
-import Create from './components/Create'
 import Main from './pages/Main'
 
 // Lazy loading components

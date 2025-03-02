@@ -6,13 +6,15 @@ import { IoMdHome } from "react-icons/io";
 import { MdDashboard } from "react-icons/md";
 import { IoCreateSharp } from "react-icons/io5";
 import { useNavigate } from 'react-router';
+import Header from '../components/Header';
 
 const Main = ({ type }) => {
     const navigate = useNavigate()
 
 
     return (
-        <div className='w-screen h-screen'>
+        <div className='w-screen h-screen overflow-x-hidden'>
+            <Header />
             <div className='max-w-[1200px] mx-auto w-full h-full'>
                 {type === 'dashboard' ? (<Dashboard />) : (type === 'list' ? (<Quiz />) : (<Create />))}
 

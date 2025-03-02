@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import Loading from './Loading'
+import QuizCard from './QuizCard'
+import Header from './Header'
 
 const Quiz = () => {
     const [quizList, setQuizList] = useState([])
@@ -46,23 +48,12 @@ const Quiz = () => {
                     large={true}
                     bg={true}
                 />) : (
-                <div className='w-full h-full px-2 py-4'>
-                    <span className='text-3xl font-poppins font-semibold text-cs-blue'>Quizzes</span>
+                <div className='w-full h-full px-2 py-4 mt-4'>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-8 p-2 overflow-x-hidden">
                         {
                             quizList.length > 0 && Array(200).fill({ i: 'dff' })?.map((quiz, index) => {
                                 return (
-                                    <div className='w-full bg-blue-100 shadow-md p-4 flex flex-col justify-center items-start gap-4'>
-                                        <span className='font-poppins text-2xl font-semibold text-cs-blue capitalize'>{quiz?.topic || "testing"}</span>
-                                        <div className='flex items-center justify-center gap-1 -mt-3'>
-                                            {/* <span className='font-poppins text-cs-blue'>createdBy:</span> */}
-                                            <span className='font-poppins font-light'>{quiz?.createdBy || "shivam"}</span>
-                                        </div>
-                                        <div className='w-full flex items-center justify-between'>
-                                            <span className='font-poppins'>{quiz?.noOfQuestion || 5}</span>
-                                            <span className='font-poppins '>{quiz?.difficulty || "Easy"}</span>
-                                        </div>
-                                    </div>
+                                    <QuizCard quiz={quiz} key={index} />
                                 )
                             })
                         }
