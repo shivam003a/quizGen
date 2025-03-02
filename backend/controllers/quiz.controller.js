@@ -97,9 +97,9 @@ export const getQuiz = async (req, res) => {
     page = parseInt(page) || 1;
     limit = Math.min(limit || 20, 20);
 
-    if (topic) query["topic"] = topic;
-    if (createdBy) query["createdBy"] = createdBy;
-    if (difficulty) query["difficulty"] = difficulty;
+    if (topic) query["topic"] = { $regex: new RegExp(topic, 'i') };
+    if (createdBy) query["createdBy"] = { $regex: new RegExp(createdBy, 'i') };
+    if (difficulty) query["difficulty"] = { $regex: new RegExp(difficulty, 'i') };
 
 
     try {
@@ -148,6 +148,26 @@ export const getSingQuiz = async (req, res) => {
             success: true,
             message: 'Fetched successfully',
             response: quizData
+        })
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            message: e?.message || 'Internal server error',
+            response: null
+        })
+    }
+}
+
+export const getCreatedByArr = async (req, res) => {
+    try {
+        const quizData = await Quiz.find();
+
+        const createdByArr = [...new Set(quizData?.map(quiz => quiz?.createdBy))]
+
+        res.status(200).json({
+            success: true,
+            message: 'Fetched successfully',
+            response: createdByArr
         })
     } catch (e) {
         return res.status(500).json({
