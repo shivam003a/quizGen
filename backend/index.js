@@ -20,6 +20,9 @@ connectDB();
 dotenv.config()
 const PORT = process.env.PORT || 5000;
 
+// For express-rate-limit, to avoid rate limit as global is server is beyond reverse proxy
+app.set("trust proxy", 1) // "1" trusts the first proxy (Render)
+
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
