@@ -100,7 +100,7 @@ const Auth = ({ type = 'signin' }) => {
             <div className='max-w-[1200px] min-h-screen mx-auto flex items-center justify-center relative'>
 
                 {/* form div */}
-                <div className='w-8/10 bg-white flex flex-col md:flex-row md:w-7/10 items-center justify-center gap-8 rounded-lg z-30 border border-[#e8e8e8]'>
+                <div className='w-8/10 bg-white flex flex-col md:flex-row md:w-7/10 items-center justify-center gap-8 rounded-lg z-30 border border-[#e8e8e8] my-8'>
 
                     {/* left */}
                     <div className="flex-1/2">
@@ -147,7 +147,7 @@ const Auth = ({ type = 'signin' }) => {
                             </button>
                         </div>
                         {type === 'signup' ? (
-                            <span className='font-poppins font-light mx-auto mt-2'>
+                            <span className='font-poppins font-light mx-auto mt-2 text-center'>
                                 Already have an account?
                                 <span className='text-cs-blue cursor-pointer'
                                     onClick={() => navigate('/signin')}
@@ -156,7 +156,7 @@ const Auth = ({ type = 'signin' }) => {
                                 </span>
                             </span>
                         ) : (
-                            <span className='font-poppins font-light mx-auto mt-2'>
+                            <span className='font-poppins font-light mx-auto mt-2 text-center'>
                                 Don't have an account?
                                 <span className='text-cs-green cursor-pointer'
                                     onClick={() => navigate('/signup')}
