@@ -2,8 +2,10 @@ import React from 'react'
 
 const Header = () => {
     return (
-        <div className='min-w-[1200px] fixed top-0 left-0 right-0 bg-white px-2 py-3'>
-            <p className='font-honk text-4xl'>quizGen</p>
+        <div className='w-full sticky top-0 bg-[#F7F6FF] shadow-md'>
+            <div className='max-w-[1200px] mx-auto px-2 py-3'>
+                <p className='font-honk text-4xl'>quizGen</p>
+            </div>
         </div>
     )
 }
