@@ -15,7 +15,10 @@ function App() {
   return (
     <Suspense
       fallback={<div>
-        <Loading />
+        <Loading
+          full={true}
+          large={true}
+        />
       </div>}>
       <Routes>
         <Route index element={<Landing />} />
