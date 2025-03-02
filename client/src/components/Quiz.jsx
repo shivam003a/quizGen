@@ -17,6 +17,7 @@ const Quiz = () => {
                 method: "GET",
                 headers: {
                     "Content-Type": 'application/json',
+                    "Authorization": "Bearer " + localStorage.getItem('authToken')
                 },
                 credentials: 'include'
             })
@@ -32,7 +33,7 @@ const Quiz = () => {
 
             setLoading(false)
         } catch (e) {
-            toast.error(e?.message)
+            toast.error(e?.message || "Something went wrong")
             setLoading(false)
         }
     }

@@ -83,7 +83,7 @@ const Auth = ({ type = 'signin' }) => {
             setLoading(false)
 
         } catch (e) {
-            toast.error(e?.message)
+            toast.error(e?.message || "Something went wrong")
             setLoading(false)
         }
     }
