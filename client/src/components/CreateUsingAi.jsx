@@ -107,7 +107,8 @@ const CreateUsingAi = () => {
                     </div>
                 ) : (
                     <div className='max-w-[1200px] w-full min-h-screen flex flex-col items-start justify-center mx-auto mt-20 gap-3 p-3 pb-16 -z-10'>
-                        <div className='flex items-center text-3xl font-poppins text-cs-blue'>Here is raw version of ai generated quiz
+                        <div className='flex items-center justify-between text-3xl font-poppins text-cs-blue w-full'>
+                            <span>Here is raw version of ai generated quiz</span>
                             <button
                                 className='ml-6 font-poppins py-3 px-4 rounded-4xl text-white mx-auto bg-cs-blue text-center'
                                 style={{ fontSize: '16px' }}
