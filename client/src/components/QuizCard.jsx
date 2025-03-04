@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import moment from 'moment'
 
 const QuizCard = ({ quiz }) => {
     const [hovered, setHovered] = useState(false)
@@ -14,7 +15,7 @@ const QuizCard = ({ quiz }) => {
             <div className='flex flex-col items-start justify-center gap-1 -mt-3'>
                 {/* <span className='font-poppins text-cs-blue'>createdBy:</span> */}
                 <span className='font-poppins font-light text-cs-gray text-sm'>{createdBy}</span>
-                <span className='font-poppins font-light text-cs-gray text-sm'>{createdAt}</span>
+                <span className='font-poppins font-light text-cs-gray text-sm'>{moment(createdAt).format('hh/MM/yyyy')}</span>
             </div>
             <div className='w-full flex items-center justify-between'>
                 <span className='font-poppins font-light py-[1px] px-4 bg-cs-blue text-white'>{noOfQuestion}</span>
