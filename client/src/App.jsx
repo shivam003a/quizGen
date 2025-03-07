@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Routes, Outlet } from 'react-router';
 import { Suspense, lazy } from 'react';
 import Loading from './components/Loading';
+import AttemptQuiz from './pages/AttemptQuiz';
 
 // Lazy loading components
 const Landing = lazy(() => import('./pages/Landing'));
@@ -35,6 +36,7 @@ function App() {
 
           <Route path="/q" element={<QLayout />}>
             <Route path="list" element={<Main type="list" />} />
+            <Route path='list/:id' element={<AttemptQuiz />} />
             <Route path="dashboard" element={<Main type="dashboard" />} />
             <Route path="create" element={<Main type="create" />} />
             <Route path="create/ai" element={<CreateUsingAi />} />

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import moment from 'moment'
+import { useNavigate } from 'react-router';
 
 const QuizCard = ({ quiz }) => {
+    const navigate = useNavigate()
     const [hovered, setHovered] = useState(false)
     const { topic, createdBy, createdAt, noOfQuestion, difficulty } = quiz;
 
@@ -22,7 +24,7 @@ const QuizCard = ({ quiz }) => {
                 <span className={`font-poppins font-light py-[1px] px-4 text-white ${capitalizedDifficulty === 'Easy' ? ('bg-[#10B981]') : (capitalizedDifficulty === 'Medium' ? ('bg-[#F59E0B]') : ('bg-[#EF4444]'))}`}>{capitalizedDifficulty}</span>
             </div>
             <div className='w-full border border-[#e6e4e4]'></div>
-            <div className='w-full flex justify-end'>
+            <div className='w-full flex justify-end' onClick={() => navigate(`/q/list/${quiz?._id}`)}>
                 <FaArrowAltCircleRight
                     color={`${hovered ? '#6C63FF' : '#c7c4c4'}`}
                     size={24}

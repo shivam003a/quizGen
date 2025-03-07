@@ -39,7 +39,7 @@ const Header = () => {
         }
     }
     return (
-        <div className='w-full fixed top-0 bg-[#F7F6FF] shadow-md'>
+        <div className='w-full h-17 fixed top-0 bg-[#F7F6FF] shadow-md'>
             <div className='max-w-[1200px] mx-auto px-2 py-3 flex items-center justify-between'>
                 <p className='font-honk text-4xl'>quizGen</p>
                 <span
