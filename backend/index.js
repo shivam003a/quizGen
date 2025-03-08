@@ -36,9 +36,9 @@ app.use(cors({
 app.use(limiter?.globalLimiter)
 
 // Specific Route Limiter
-// app.use('/api/auth/signup', limiter?.signupLimiter)
-// app.use('/api/auth/signin', limiter?.signinLimiter)
-// app.use('/api/quiz/generate', limiter?.quizGenerateLimiter)
+app.use('/api/auth/signup', limiter?.signupLimiter)
+app.use('/api/auth/signin', limiter?.signinLimiter)
+app.use('/api/quiz/generate', limiter?.quizGenerateLimiter)
 
 // Routes
 app.use('/api/auth', authRoutes)
