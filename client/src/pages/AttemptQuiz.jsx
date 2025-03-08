@@ -23,7 +23,8 @@ const AttemptQuiz = () => {
                     "Content-Type": 'application/json',
                     "Accept": 'application/json',
                     'Authorization': "Bearer " + localStorage.getItem('authToken')
-                }
+                },
+                credentials: 'include'
             })
 
             const data = await res.json()
@@ -87,7 +88,8 @@ const AttemptQuiz = () => {
                     "Content-Type": 'application/json',
                     "Authorization": 'Bearer ' + localStorage.getItem('authToken')
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(body),
+                credentials: 'include'
             })
 
             const data = await res.json()

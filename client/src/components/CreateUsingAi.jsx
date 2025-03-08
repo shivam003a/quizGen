@@ -39,7 +39,8 @@ const CreateUsingAi = () => {
                     difficulty,
                     noOfQuestion,
                     userPrompt
-                })
+                }),
+                credentials: 'include'
             })
 
             const data = await res.json()

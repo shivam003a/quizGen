@@ -56,7 +56,8 @@ const Auth = ({ type = 'signin' }) => {
                         lastName: formData?.fullname?.split(' ')[1],
                         email: formData?.email,
                         password: formData?.password
-                    })
+                    }),
+                    credentials: 'include'
                 })
             }
             else {

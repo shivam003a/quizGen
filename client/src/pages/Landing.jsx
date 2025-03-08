@@ -19,7 +19,8 @@ function Landing() {
                 headers: {
                     "Content-Type": 'application/json',
                     "Authorization": 'Bearer ' + localStorage.getItem('authToken')
-                }
+                },
+                credentials: 'include'
             })
 
             const data = await res.json()
