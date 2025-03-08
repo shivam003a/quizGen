@@ -104,7 +104,7 @@ const Quiz = () => {
                             <input
                                 type='text'
                                 placeholder='Search by topic'
-                                className='w-45 px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
+                                className='w-full sm:w-45 px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
                                 onChange={(e) => setSearchKey(e?.target?.value)}
                                 value={searchKey}
                             />
@@ -122,7 +122,7 @@ const Quiz = () => {
                         <div className='flex gap-4'>
 
                             <select
-                                className='px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
+                                className='w-1/2 sm:w-auto px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
                                 aria-label='Select Created By'
                                 value={creator}
                                 onChange={(e) => {
@@ -138,7 +138,7 @@ const Quiz = () => {
 
                             {/* Difficulty */}
                             <select
-                                className='px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
+                                className='w-1/2 sm:w-auto px-3 py-2 border text-sm font-poppins font-light border-cs-gray focus:outline-none'
                                 aria-label='Select Difficulty'
                                 value={difficulty}
                                 onChange={(e) => {
