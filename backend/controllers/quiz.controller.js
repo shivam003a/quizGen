@@ -23,6 +23,9 @@ export const createQuiz = async (req, res) => {
         const prompt = `
         Generate a quiz on the topic of "${topic}" with ${noOfQuestion} questions of ${difficulty} difficulty.
         Each question should be unique and cover different aspects of the topic.
+
+        If the user provides specific instructions in **${userPrompt}**, these instructions **must** be honored and incorporated into the quiz. The majority of the questions should reflect the users request while still covering other relevant aspects of the topic.  
+        
         Each question should have:
         1. A question statement.
         2. 4 multiple-choice options (labeled A, B, C, D).
@@ -34,7 +37,10 @@ export const createQuiz = async (req, res) => {
         - **Description**: Write a brief description (1-2 sentences) summarizing the quiz.
         - **Tags**: Provide relevant tags to categorize the quiz (e.g., #Science, #History, #PopCulture, #Geography, #Trivia).
         - **Time Limit**: Include a time limit for the quiz (in seconds).
-        - **User Prompt**: If the user provides additional context or instructions about the quiz (e.g., "Create Quiz mainly on the event loop"), incorporate it into the quiz generation. If user provides additional details, then this will be the user prompt: ${userPrompt}
+        - **User Instructions**: If the user provides additional details in **${userPrompt}**, then:
+            - The quiz should **strongly reflect** the users request.  
+            - At least **70% of the questions** should directly align with the user's instructions.  
+            - The remaining **30% of the questions** should cover general aspects of the topic to ensure comprehensive coverage.  
 
         Format the response as a JSON object containing:
         - "title" (string)
