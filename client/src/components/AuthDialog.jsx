@@ -25,7 +25,7 @@ const AuthDialog = ({ isOpen, onClose, header, footer, type }) => {
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
             onClick={onClose}
         >
-            <div className="bg-white shadow-sm w-148 relative animate-fade-in"
+            <div className="bg-white shadow-sm w-full sm:w-148 relative animate-fade-in"
                 onClick={(e) => e.stopPropagation()}
             >
 

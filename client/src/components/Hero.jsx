@@ -4,8 +4,7 @@ import landingSvg from '../assets/landing.svg'
 import { FaArrowRight } from "react-icons/fa";
 import AuthDialog from './AuthDialog';
 
-const Hero = () => {
-    const [isGetStartedOpen, setIsGetStartedOpen] = useState(false)
+const Hero = ({ userLogged }) => {
     const [isDemoOpen, setIsDemoOpen] = useState(false)
     return (
         <div className='flex flex-col-reverse items-center gap-4 py-16 md:py-32 md:flex-row'>
@@ -22,8 +21,7 @@ const Hero = () => {
                     Create quizzes on any topic with AI or challenge yourself with existing quizzes. Learning made fun and effortless!
                 </p>
                 <div className='flex flex-row gap-3 mt-4'>
-                    <NavLink to='/signin' className='flex items-center gap-2 px-4 py-2 bg-cs-blue text-white font-bold rounded-4xl cursor-pointer'
-                        onClick={() => setIsGetStartedOpen(true)}
+                    <NavLink to={`${userLogged ? '/q/list' : '/signin'}`} className='flex items-center gap-2 px-4 py-2 bg-cs-blue text-white font-bold rounded-4xl cursor-pointer'
                     >
                         Get Started
                         <FaArrowRight />

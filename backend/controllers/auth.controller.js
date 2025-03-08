@@ -150,3 +150,30 @@ export const signout = async (req, res) => {
         })
     }
 }
+
+export const verify = async (req, res) => {
+    const { id } = req.user
+
+    try {
+        const response = await User.findById(id).select('-password')
+        if (!response) {
+            return res.status(401).json({
+                success: false,
+                message: 'Login Again',
+                response: null
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: 'Verified',
+            response: response
+        })
+    } catch (e) {
+        res.status(500).json({
+            success: false,
+            message: e?.message || "Internal Server Error",
+            response: null
+        })
+    }
+}

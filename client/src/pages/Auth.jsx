@@ -5,10 +5,12 @@ import signinSvg from '../assets/login.jpg'
 import { IoPersonSharp } from "react-icons/io5";
 import { MdMailOutline } from "react-icons/md";
 import { MdLockOutline } from "react-icons/md";
+import { FaArrowAltCircleLeft } from "react-icons/fa"
 import signinBlob from '../assets/blob-1.svg'
 import signupBlob from '../assets/blob-2.svg'
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 const Auth = ({ type = 'signin' }) => {
     const formDetails = {
@@ -100,8 +102,9 @@ const Auth = ({ type = 'signin' }) => {
             <div className='max-w-[1200px] min-h-screen mx-auto flex items-center justify-center relative'>
 
                 {/* form div */}
-                <div className='w-8/10 bg-white flex flex-col md:flex-row md:w-7/10 items-center justify-center gap-8 rounded-lg z-30 border border-[#e8e8e8] my-8'>
+                <div className='w-8/10 bg-white flex flex-col md:flex-row md:w-7/10 items-center justify-center gap-8 rounded-lg z-30 border border-[#e8e8e8] my-8 relative'>
 
+                    <FaArrowAltCircleLeft className='absolute top-[20px] left-[20px] cursor-pointer' onClick={() => navigate(-1)} size={22} color='#777777' />
                     {/* left */}
                     <div className="flex-1/2">
                         <img
