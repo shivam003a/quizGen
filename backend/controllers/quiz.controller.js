@@ -20,34 +20,52 @@ export const createQuiz = async (req, res) => {
         const randomSeed = Math.random().toString(36).substring(7);
 
         const prompt = `
-        Generate a quiz on the topic of "${topic}" with ${noOfQuestion} questions of ${difficulty} difficulty.
-        Each question should be unique and cover different aspects of the topic.
-        Each question should have:
-        1. A question statement.
-        2. 4 multiple-choice options (labeled A, B, C, D).
-        3. The correct answer (e.g., "A").
-        4. A brief explanation of why the correct answer is right.
+    Generate an engaging and informative quiz on the topic of "${topic}" with ${noOfQuestion} questions of ${difficulty} difficulty.
+    Each question should be unique and cover different aspects of the topic.
+    Each question should have:
+    1. A question statement.
+    2. 4 multiple-choice options (labeled A, B, C, D).
+    3. The correct answer (e.g., "A").
+    4. A brief explanation of why the correct answer is right.
 
-        Format the response as a JSON array where each object contains:
+    Additionally:
+    - **Title**: Provide a catchy and relevant title for the quiz.
+    - **Description**: Write a brief description (1-2 sentences) summarizing the quiz.
+    - **Tags**: Provide relevant tags to categorize the quiz (e.g., #Science, #History, #PopCulture, #Geography, #Trivia).
+    - **Time Limit (Optional)**: Include a time limit for the quiz (in seconds).
+
+    Format the response as a JSON object containing:
+    - "title" (string)
+    - "description" (string)
+    - "tags" (array of strings)
+    - "timeLimit" (number, optional)
+    - "quiz" (array of objects, where each object contains):
         - "question" (string)
         - "options" (array of 4 strings)
         - "correctAnswer" (string, e.g., "A")
         - "explanation" (string)
 
-        Use double quotes for all property names and string values. Do not use single quotes.
+    Use double quotes for all property names and string values. Do not use single quotes.
 
-        Example:
-        [
+    Example:
+    {
+        "title": "World Capitals Challenge",
+        "description": "Test your knowledge of world capitals with this fun and challenging quiz!",
+        "tags": ["#Geography", "#Trivia"],
+        "timeLimit": 600,
+        "quiz": [
             {
-            "question": "What is the capital of France?",
-            "options": ["Paris", "London", "Berlin", "Madrid"],
-            "correctAnswer": "A",
-            "explanation": "Paris is the capital of France, known for its cultural landmarks like the Eiffel Tower."
+                "question": "What is the capital of France?",
+                "options": ["Paris", "London", "Berlin", "Madrid"],
+                "correctAnswer": "A",
+                "explanation": "Paris is the capital of France, known for its cultural landmarks like the Eiffel Tower."
             }
         ]
+    }
 
-        Random Seed: ${randomSeed}
-        `;
+    Random Seed: ${randomSeed}
+`;
+        
 
         const response = await genai.chat.completions.create({
             model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo',
