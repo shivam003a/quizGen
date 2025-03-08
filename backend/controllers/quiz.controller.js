@@ -5,9 +5,10 @@ import Quiz from '../models/quiz.schema.js'
 import Score from '../models/score.schema.js'
 
 export const createQuiz = async (req, res) => {
-    const { topic, difficulty, noOfQuestion } = req.body
+    const { topic, difficulty, noOfQuestion, userPrompt } = req.body
     const { email } = req.user
 
+    console.log(req.body)
     try {
         if (!topic || !difficulty || !noOfQuestion) {
             return res.status(401).json({
@@ -28,23 +29,41 @@ export const createQuiz = async (req, res) => {
         3. The correct answer (e.g., "A").
         4. A brief explanation of why the correct answer is right.
 
-        Format the response as a JSON array where each object contains:
-        - "question" (string)
-        - "options" (array of 4 strings)
-        - "correctAnswer" (string, e.g., "A")
-        - "explanation" (string)
+        Additionally:
+        - **Title**: Provide a catchy and relevant title for the quiz.
+        - **Description**: Write a brief description (1-2 sentences) summarizing the quiz.
+        - **Tags**: Provide relevant tags to categorize the quiz (e.g., #Science, #History, #PopCulture, #Geography, #Trivia).
+        - **Time Limit**: Include a time limit for the quiz (in seconds).
+        - **User Prompt**: If the user provides additional context or instructions about the quiz (e.g., "Create Quiz mainly on the event loop"), incorporate it into the quiz generation. If user provides additional details, then this will be the user prompt: ${userPrompt}
+
+        Format the response as a JSON object containing:
+        - "title" (string)
+        - "description" (string)
+        - "tags" (array of strings)
+        - "timeLimit" (number)
+        - "questions" (array of objects, where each object contains):
+            - "question" (string)
+            - "options" (array of 4 strings)
+            - "correctAnswer" (string, e.g., "A")
+            - "explanation" (string)
 
         Use double quotes for all property names and string values. Do not use single quotes.
 
         Example:
-        [
-            {
-            "question": "What is the capital of France?",
-            "options": ["Paris", "London", "Berlin", "Madrid"],
-            "correctAnswer": "A",
-            "explanation": "Paris is the capital of France, known for its cultural landmarks like the Eiffel Tower."
-            }
-        ]
+        {
+            "title": "World Capitals Challenge",
+            "description": "Test your knowledge of world capitals with this fun and challenging quiz!",
+            "tags": ["#Geography", "#Trivia"],
+            "timeLimit": 600,
+            "questions": [
+                {
+                    "question": "What is the capital of France?",
+                    "options": ["Paris", "London", "Berlin", "Madrid"],
+                    "correctAnswer": "A",
+                    "explanation": "Paris is the capital of France, known for its cultural landmarks like the Eiffel Tower."
+                }
+            ]
+        }
 
         Random Seed: ${randomSeed}
         `;
@@ -55,7 +74,7 @@ export const createQuiz = async (req, res) => {
             temperature: 0.7,
         })
 
-        console.log(response?.choices[0]?.message?.content)
+        // console.log("x", response?.choices[0]?.message?.content)
         const quizData = JSON?.parse(response?.choices[0]?.message?.content)
 
         if (!quizData) {
@@ -66,13 +85,13 @@ export const createQuiz = async (req, res) => {
             })
         }
 
-        const responseQuizData = await Quiz.create({
-            difficulty,
-            topic,
-            noOfQuestion,
-            questions: quizData,
-            createdBy: email
-        })
+        quizData.difficulty = difficulty
+        quizData.noOfQuestion = noOfQuestion
+        quizData.createdBy = email
+
+        console.log(quizData)
+
+        const responseQuizData = await Quiz.create(quizData)
 
         res.status(201).json({
             success: true,
@@ -83,7 +102,7 @@ export const createQuiz = async (req, res) => {
     } catch (e) {
         res.status(500).json({
             success: false,
-            message: e || "Internal Server Error",
+            message: e.message || "Internal Server Error",
             response: null
         })
     }
@@ -277,7 +296,7 @@ export const submitQuizForMoreTime = async (req, res) => {
         const updatedScoreData = await Score.findOneAndUpdate({ quizId, userId }, {
             $set: { userScore, userSelectedAns },
             $inc: { totalAttempt: 1 }
-        }, { new: true })
+        }, { upsert: true }, { new: true })
 
         res.status(200).json({
             success: true,

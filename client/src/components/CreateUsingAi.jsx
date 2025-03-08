@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import createAiImg from '../assets/ai.jpg'
 import { FaBook, FaChartBar, FaListOl } from 'react-icons/fa'
+import { FaEnvelopeOpenText } from "react-icons/fa6";
 import toast from 'react-hot-toast'
 import Loading from './Loading'
 import { useNavigate } from 'react-router'
@@ -20,6 +21,7 @@ const CreateUsingAi = () => {
     const [noOfQuestion, setNoOfQuestion] = useState('')
     const [loading, setLoading] = useState(false)
     const [quiz, setQuiz] = useState([])
+    const [userPrompt, setUserPrompt] = useState('')
 
     const handleGenerate = async (e) => {
         e.preventDefault()
@@ -35,7 +37,8 @@ const CreateUsingAi = () => {
                 body: JSON.stringify({
                     topic,
                     difficulty,
-                    noOfQuestion
+                    noOfQuestion,
+                    userPrompt
                 })
             })
 
@@ -99,6 +102,18 @@ const CreateUsingAi = () => {
                                         <option value={"25"}>25</option>
                                     </select>
                                 </div>
+                            </div>
+
+                            <div className='flex items-center justify-start gap-4 p-2 self-stretch border-b border-cs-gray mt-6'>
+                                <FaEnvelopeOpenText color='#777777' />
+                                <input
+                                    type='text'
+                                    name='topic'
+                                    placeholder='Enter Optional Prompt'
+                                    className='w-full border-0 outline-0 font-poppins font-light text-sm'
+                                    value={userPrompt}
+                                    onChange={(e) => setUserPrompt(e?.target?.value)}
+                                />
                             </div>
 
                             <button className='font-poppins py-3 px-4 rounded-4xl mt-10 w-35 text-white mx-auto bg-cs-blue text-center' onClick={handleGenerate}>Generate</button>

@@ -1,12 +1,16 @@
 import mongoose from 'mongoose'
 
 const quizSchema = new mongoose.Schema({
-    difficulty: {
+    title: {
         type: String,
         required: true
     },
-    noOfQuestion: {
-        type: String,
+    description: {
+        type: String
+    },
+    tags: [],
+    timeLimit: {
+        type: Number,
         required: true
     },
     questions: [{
@@ -21,8 +25,13 @@ const quizSchema = new mongoose.Schema({
             type: String
         }
     }],
-    topic: {
-        type: String
+    difficulty: {
+        type: String,
+        required: true
+    },
+    noOfQuestion: {
+        type: String,
+        required: true
     },
     createdBy: {
         type: String

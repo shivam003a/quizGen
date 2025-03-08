@@ -155,7 +155,7 @@ const Quiz = () => {
                     </div>
 
                     {/* cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 p-2 overflow-x-hidden">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-2 overflow-x-hidden">
                         {
                             quizList.length > 0 ? (quizList?.map((quiz, index) => {
                                 return (

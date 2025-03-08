@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router';
 const QuizCard = ({ quiz }) => {
     const navigate = useNavigate()
     const [hovered, setHovered] = useState(false)
-    const { topic, createdBy, createdAt, noOfQuestion, difficulty } = quiz;
+    const { title, createdBy, createdAt, noOfQuestion, difficulty } = quiz;
 
     // Capitalize the first letter of the difficulty
     const capitalizedDifficulty = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
 
     return (
         <div className='w-full bg-[#F7F6FF] p-4 flex flex-col justify-center items-start gap-4 shadow'>
-            <span className='font-poppins text-2xl font-semibold text-cs-blue capitalize'>{topic}</span>
+            <span className='font-poppins text-2xl font-semibold text-cs-blue capitalize'>{title}</span>
             <div className='flex flex-col items-start justify-center gap-1 -mt-3'>
                 {/* <span className='font-poppins text-cs-blue'>createdBy:</span> */}
                 <span className='font-poppins font-light text-cs-gray text-sm'>{createdBy}</span>

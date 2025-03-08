@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 import Loading from './Loading'
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Header = () => {
     return (
         <div className='w-full h-17 fixed top-0 bg-[#F7F6FF] shadow-md'>
             <div className='max-w-[1200px] mx-auto px-2 py-3 flex items-center justify-between'>
-                <p className='font-honk text-4xl'>quizGen</p>
+                <NavLink to={'/'} className='font-honk text-4xl'>quizGen</NavLink>
                 <span
                     className='font-poppins font-light underline cursor-pointer'
                     onClick={handleLogout}
