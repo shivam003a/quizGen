@@ -59,11 +59,11 @@ const CreateUsingAi = () => {
         <div className='w-full min-h-screen overflow-x-hidden'>
             {loading ? (<Loading full={true} large={true} ai={true} />) : (
                 quiz.length === 0 ? (
-                    <div className='max-w-[1200px] w-full min-h-screen flex items-center justify-center mx-auto mt-20 gap-3 p-3'>
-                        <div className='flex-3/5'>
-                            <img src={createAiImg} className='w-3/5 mx-auto' />
+                    <div className='max-w-[1200px] w-full min-h-screen flex flex-col sm:flex-row items-center justify-center mx-auto mt-20 gap-3 p-3 pb-8'>
+                        <div className='flex-1/2'>
+                            <img src={createAiImg} className='w-full sm:w-3/5 mx-auto' />
                         </div>
-                        <div className='flex-2/5 flex flex-col justify-center items-start gap-2'>
+                        <div className='flex-1/2 flex flex-col justify-center items-start gap-2'>
                             <span className='font-poppins text-cs-blue text-3xl font-semibold'>Create Quiz using AI</span>
                             <span className='font-poppins font-light text-cs-gray'>Let AI generate a quiz for you in seconds. Just fill in the details below!</span>
 
