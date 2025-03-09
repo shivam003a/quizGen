@@ -26,16 +26,16 @@ function Landing() {
             const data = await res.json()
 
             if (res.ok) {
-                toast.success(data?.message)
+                // toast.success(data?.message)
                 dispatch(setUserData(data?.response))
                 setuserLogged(true)
             } else {
-                toast.error(data?.message)
+                // toast.error(data?.message)
                 setuserLogged(false)
                 dispatch(setUserData({}))
             }
         } catch (e) {
-            toast.error(e?.message)
+            // toast.error(e?.message)
         }
     }
 

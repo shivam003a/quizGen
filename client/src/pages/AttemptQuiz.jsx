@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import toast from 'react-hot-toast'
 import Loading from '../components/Loading'
+import { useSelector } from 'react-redux'
+import moment from 'moment'
 
 const AttemptQuiz = () => {
     const { id } = useParams()
@@ -13,6 +15,9 @@ const AttemptQuiz = () => {
     const [userScore, setUserScore] = useState(0)
     const [loading, setLoading] = useState(false)
     const [loadingSubmit, setLoadingSubmit] = useState(false)
+    const [timeLimit, setTimeLimit] = useState(600)
+
+    const { userData } = useSelector(state => state.user)
 
     const fetchQuizById = async () => {
         setLoading(true)
@@ -33,6 +38,7 @@ const AttemptQuiz = () => {
                 toast.success(data?.message)
                 setQuiz(data?.response)
                 setQuestions(data?.response?.questions)
+                setTimeLimit(data?.response?.timeLimit)
             } else {
                 toast.error(data?.message)
                 setUserSelectedAns([])
@@ -71,7 +77,6 @@ const AttemptQuiz = () => {
     }
 
     const handleSubmitQuiz = async (e) => {
-        e.preventDefault()
         setLoadingSubmit(true)
 
         try {
@@ -79,7 +84,7 @@ const AttemptQuiz = () => {
                 userScore,
                 userSelectedAns,
                 quizId: id,
-                userId: '67c31cbe728de79550b6f69f'
+                userId: userData?._id
             }
 
             const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/quiz/submit`, {
@@ -108,6 +113,20 @@ const AttemptQuiz = () => {
         setLoadingSubmit(false)
     }
 
+    useEffect(() => {
+        let interval;
+        if (timeLimit <= 0) {
+            handleSubmitQuiz()
+        }
+        if (timeLimit > 0) {
+            interval = setInterval(() => {
+                setTimeLimit(prev => prev - 1)
+            }, 1000)
+        }
+
+        return () => clearInterval(interval)
+    }, [timeLimit])
+
     return (
         <div className='w-full mt-16'>
             {loading ? (<Loading
@@ -116,7 +135,10 @@ const AttemptQuiz = () => {
             />
             ) : (
                 <div className='max-w-[1200px] h-[calc(100vh-68px)] mx-auto p-4 flex flex-col gap-8 justify-between'>
-                    <span className='text-3xl font-poppins font-light mt-4'>{questions[currentQuestion]?.question}</span>
+                    <div className='flex flex-col'>
+                        <span className='text-lg font-poppins bg-cs-blue text-white w-fit py-1 px-2 self-end'>{moment.utc(timeLimit * 1000)?.format('HH:mm:ss')}</span>
+                        <span className='text-3xl font-poppins font-light mt-4'>{questions[currentQuestion]?.question}</span>
+                    </div>
                     <div className='mb-16'>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 p-2 overflow-x-hidden">
                             {

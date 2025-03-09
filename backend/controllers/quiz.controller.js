@@ -80,7 +80,7 @@ export const createQuiz = async (req, res) => {
             temperature: 0.7,
         })
 
-        // console.log("x", response?.choices[0]?.message?.content)
+        console.log("x", response?.choices[0]?.message?.content)
         const quizData = JSON?.parse(response?.choices[0]?.message?.content)
 
         if (!quizData) {
@@ -122,7 +122,7 @@ export const getQuiz = async (req, res) => {
     page = parseInt(page) || 1;
     limit = Math.min(limit || 20, 20);
 
-    if (topic) query["topic"] = { $regex: new RegExp(topic, 'i') };
+    if (topic) query["title"] = { $regex: new RegExp(topic, 'i') };
     if (createdBy) query["createdBy"] = { $regex: new RegExp(createdBy, 'i') };
     if (difficulty) query["difficulty"] = { $regex: new RegExp(difficulty, 'i') };
 

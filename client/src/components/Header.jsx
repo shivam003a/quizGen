@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { NavLink, useNavigate } from 'react-router'
 import Loading from './Loading'
+import { useDispatch } from 'react-redux'
+import { setUserData } from '../redux/slices/userSlice'
 
 const Header = () => {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
 
     const handleLogout = async () => {
         setLoading(true)
@@ -38,6 +41,34 @@ const Header = () => {
             setLoading(false)
         }
     }
+
+    const verifyUser = async () => {
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Authorization": 'Bearer ' + localStorage.getItem('authToken')
+                },
+                credentials: 'include'
+            })
+
+            const data = await res.json()
+
+            if (res.ok) {
+                dispatch(setUserData(data?.response))
+                setuserLogged(true)
+            } else {
+                setuserLogged(false)
+                dispatch(setUserData({}))
+            }
+        } catch (e) {
+        }
+    }
+    useEffect(() => {
+        verifyUser()
+    }, [])
+
     return (
         <div className='w-full h-17 fixed top-0 bg-[#F7F6FF] shadow-md'>
             <div className='max-w-[1200px] mx-auto px-2 py-3 flex items-center justify-between'>

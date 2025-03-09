@@ -11,8 +11,9 @@ import signupBlob from '../assets/blob-2.svg'
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
+import { setUserData } from '../redux/slices/userSlice'
 
-const Auth = ({ type = 'signin' }) => {
+const Auth = ({ type }) => {
     const formDetails = {
         signup: [
             { name: 'fullname', type: 'text', placeholder: 'Full Name' },
@@ -26,6 +27,7 @@ const Auth = ({ type = 'signin' }) => {
     }
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [formData, setFormData] = useState({
         fullname: '',
         email: '',
@@ -77,15 +79,17 @@ const Auth = ({ type = 'signin' }) => {
 
             const data = await res.json()
             if (res?.ok) {
-                type === 'signup' ? navigate('/signin') : navigate('/q/list')
+                type === "signin" ? (dispatch(setUserData(data?.response)), navigate("/q/list")) : navigate("/signin");
                 localStorage.setItem('authToken', data?.authToken)
                 toast.success(data?.message)
             } else {
                 toast.error(data?.message)
+                dispatch(setUserData({}))
             }
             setLoading(false)
 
         } catch (e) {
+            console.log(e)
             toast.error(e?.message || "Something went wrong")
             setLoading(false)
         }
@@ -105,7 +109,7 @@ const Auth = ({ type = 'signin' }) => {
                 {/* form div */}
                 <div className='w-8/10 bg-white flex flex-col md:flex-row md:w-7/10 items-center justify-center gap-8 rounded-lg z-30 border border-[#e8e8e8] my-8 relative'>
 
-                    <FaArrowAltCircleLeft className='absolute top-[20px] left-[20px] cursor-pointer' onClick={() => navigate(-1)} size={22} color='#777777' />
+                    <FaArrowAltCircleLeft className='absolute top-[20px] left-[20px] cursor-pointer' onClick={() => navigate('/')} size={22} color='#777777' />
                     {/* left */}
                     <div className="flex-1/2">
                         <img
