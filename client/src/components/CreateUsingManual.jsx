@@ -91,7 +91,7 @@ const CreateUsingManual = () => {
                     <div className='flex-1/2 m-4'>
                         <span className='text-cs-blue font-poppins font-md'>Questions</span>
                         {questions?.length > 0 && questions?.map((q, index) => (
-                            <QuestionCard quizQuestion={q} />
+                            <QuestionCard quizQuestion={q} index={index} setQuestions={setQuestions} questions={questions} />
                         ))}
                         <button className='px-2 py-1 bg-cs-blue text-white mt-2 self-end' onClick={handlAddMore}>Add More</button>
 
